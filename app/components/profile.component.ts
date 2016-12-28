@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
         this._githubService.getUser().subscribe(
             (user) => { this.user = user },
             (err) => { console.log(err) },
-            () => console.log('Finished')
+            () => console.log('Finished Loading User Data')
         )
     }
 }
