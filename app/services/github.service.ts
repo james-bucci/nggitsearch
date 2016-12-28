@@ -17,7 +17,17 @@ export class GithubService {
             .do(data => console.log(data) )
             .catch((err, caught) => this._handleHttpError(err, caught));
     }
+    
+    getRepos() {
+        return this._http.get('https://api.github.com/users/' + this.username + '/repos')
+            .map((res:Response) => res.json())
+            .do(data => console.log(data) )
+            .catch((err, caught) => this._handleHttpError(err, caught));
+    }
 
+    resetUser(user : string) {
+        this.username = user;
+    }
     _handleHttpError(err:any, caught:any) {
         console.log('Error Caught ' + err);
         return Observable.throw(err)

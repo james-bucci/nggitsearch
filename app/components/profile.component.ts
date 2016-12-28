@@ -9,16 +9,26 @@ import { GithubService } from '../services/github.service';
 })
 export class ProfileComponent implements OnInit {
     user : any;
+    repos : any[];
+    username : string;
 
-    constructor(private _githubService : GithubService) {
+    constructor(private _githubService : GithubService) {}
 
-     }
+    ngOnInit() {}
 
-    ngOnInit() { 
+    findUser() {
+        this._githubService.resetUser(this.username);
+        
         this._githubService.getUser().subscribe(
             (user) => { this.user = user },
             (err) => { console.log(err) },
-            () => console.log('Finished Loading User Data')
+            () => console.log('Finished Loading Profile')
+        );
+
+        this._githubService.getRepos().subscribe(
+            (repos) => { this.repos = repos },
+            (err) => { console.log(err) },
+            () => console.log('Finished Loading Repos')
         )
     }
 }
